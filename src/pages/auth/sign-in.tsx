@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -39,6 +40,10 @@ export function SignIn() {
     <>
       <title>Login | pizza.shop</title>
       <div className="p-8">
+        <Button variant="outline" asChild className="absolute right-8 top-8">
+          <Link to={"/sign-up"}>Novo estabelecimento</Link>
+        </Button>
+
         <div className="w-[350px] flex flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
