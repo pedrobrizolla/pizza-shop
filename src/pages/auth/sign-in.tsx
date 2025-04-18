@@ -21,8 +21,6 @@ export function SignIn() {
 
   async function handleSignIn(data: any) {
     try {
-      console.log(data);
-
       await new Promise((resolve) => setTimeout(resolve, 2000));
       toast.success("Aviso de autenticação", {
         description: "Logue no seu e-mail para acessar.",

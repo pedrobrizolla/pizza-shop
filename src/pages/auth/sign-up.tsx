@@ -26,8 +26,6 @@ export function SignUp() {
 
   async function handleSignUp(data: any) {
     try {
-      console.log(data);
-
       await new Promise((resolve) => setTimeout(resolve, 2000));
       toast.success("Parabéns!", {
         description: "Restaurante cadastrado com sucesso.",
