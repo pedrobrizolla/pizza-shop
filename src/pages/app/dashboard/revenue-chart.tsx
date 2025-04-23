@@ -9,6 +9,7 @@ import {
 import colors from "tailwindcss/colors";
 
 import {
+  CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -54,6 +55,7 @@ export function RevenueChart() {
                 })
               }
             />
+            <CartesianGrid vertical={false} className="stroke-muted" />
             <Line
               type="linear"
               strokeWidth={2}
