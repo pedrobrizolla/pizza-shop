@@ -6,6 +6,14 @@ import { Dashboard } from "./pages/app/dashboard/dashboard";
 import { Orders } from "./pages/app/orders/orders";
 import { SignIn } from "./pages/auth/sign-in";
 import { SignUp } from "./pages/auth/sign-up";
+import { useAuthGuard } from "./protected/use-auth-guard";
+
+// @ts-ignore
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  useAuthGuard();
+
+  return children;
+};
 
 export const router = createBrowserRouter([
   {
@@ -13,11 +21,24 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     element: <AppLayout />,
     children: [
-      { path: "/", element: <Dashboard /> },
-      { path: "/orders", element: <Orders /> },
+      {
+        path: "/",
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/orders",
+        element: (
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
-
   {
     path: "/",
     element: <AuthLayout />,
