@@ -27,7 +27,6 @@ const storeProfileSchema = z.object({
 });
 
 type StoreProfileShema = z.infer<typeof storeProfileSchema>;
-
 export function StoreProfileDialog() {
   const queryClient = useQueryClient();
 

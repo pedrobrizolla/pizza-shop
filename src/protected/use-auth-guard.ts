@@ -1,4 +1,4 @@
-import { getProfile } from "@/api/auth";
+import { getProfile } from "@/api/get-profile";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
