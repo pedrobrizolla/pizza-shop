@@ -1,9 +1,16 @@
+import { getMonthRevenue } from "@/api/get-month-revenue";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, TrendingUp } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 
 // export interface MonthRevenueCardProps {}
 
 export function MonthRevenueCard() {
+  const { data: monthRevenue } = useQuery({
+    queryFn: getMonthRevenue,
+    queryKey: ["metrics", "month-revenue"],
+  });
+
   return (
     <Card className="bg-dark">
       <CardHeader className="flex items-center justify-between pb-2">
@@ -13,12 +20,36 @@ export function MonthRevenueCard() {
         <DollarSign className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1">
-        <span className="text-2xl font-bold tracking-tight">R$ 1248,60</span>
-        <p className="flex gap-1 text-xs text-muted-foreground">
-          <TrendingUp className="h-4 w-4 mr-2 text-emerald-500 dark:text-emerald-400" />
-          <span className="text-emerald-500 dark:text-emerald-400">+2%</span> em
-          relação ao mês passado
-        </p>
+        {monthRevenue && (
+          <>
+            <span className="text-2xl font-bold tracking-tight">
+              {(monthRevenue.receipt / 100).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
+            <p className="flex gap-1 text-xs text-muted-foreground">
+              {monthRevenue.diffFromLastMonth >= 0 ? (
+                <>
+                  <TrendingUp className="h-4 w-4 mr-2 text-emerald-500 dark:text-emerald-400" />
+                  <span className="text-emerald-500 dark:text-emerald-400">
+                    {monthRevenue.diffFromLastMonth}%
+                  </span>
+                  em{" "}
+                </>
+              ) : (
+                <>
+                  <TrendingDown className="h-4 w-4 mr-2 text-rose-500 dark:text-rose-400" />
+                  <span className="text-rose-500 dark:text-rose-400">
+                    {monthRevenue.diffFromLastMonth}%
+                  </span>
+                  em{" "}
+                </>
+              )}
+              relação a ontem
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   );
