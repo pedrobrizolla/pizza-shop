@@ -134,7 +134,7 @@ export function StoreProfileDialog() {
           </DialogClose>
           <DialogClose asChild>
             <Button type="submit" variant="success" disabled={isSubmitting}>
-              Save
+              Salvar
             </Button>
           </DialogClose>
         </DialogFooter>
